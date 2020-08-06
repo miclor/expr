@@ -16,19 +16,38 @@ struct Token<'a> {
 
 #[derive(Debug)]
 struct Lexer<'a> {
+    input_string: &'a str,
     tokens: Vec<Token<'a>>,
 }
 
-fn match_number(source_text: &str)  {
+impl<'a> Lexer<'a> {
+    pub fn new(input_string: &'a str) -> Lexer<'a> {
+        Lexer { tokens: Vec::new(), input_string: input_string}
+    }
 
-    let re = Regex::new(r"\D").unwrap();
-    assert!(re.is_match("2%%014a01a11"));
+    fn lex(&self, source_text: &'a str)  {
+        let re_open_paren = Regex::new(r"[(]{1}").unwrap();
+        let re_close_paren = Regex::new(r"[)]{1}").unwrap();
+        let re_atom = Regex::new(r"[0-9A-za-z].*").unwrap();
+
+        let n = 0;
+
+        while (n < source_text.length()) {
+
+            n =
+        }
+
+        assert!(re_open_paren.is_match("("));
+        assert!(re_close_paren.is_match(")"));
+        assert!(re_atom.is_match("Atom123"));
+    }
 }
 
 
 fn main() {
-    println!("Hello, world!");
-    match_number("( 232 )");
+    let l = Lexer::new("( test )");
+    l.lex("( atom )");
+    println!("ugh")
 }
 
 
